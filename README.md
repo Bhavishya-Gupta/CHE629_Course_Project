@@ -1,43 +1,193 @@
-# 🧬 CHE629: Artificial Intelligence in Systems Biology
-**Course Project: DeepGRNCs - Inferring Gene Regulatory Networks**
+# CHE629 Course Project — DeepGRNCS
 
-[![Author](https://img.shields.io/badge/Author-Bhavishya_Gupta-blue.svg)](https://github.com/Bhavishya-Gupta)
-[![Institution](https://img.shields.io/badge/Institution-IIT_Kanpur-orange.svg)](https://www.iitk.ac.in/)
-[![Course](https://img.shields.io/badge/Course-CHE629-success.svg)](#)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](#)
+A polished, end-to-end implementation of **DeepGRNCS**, a deep learning framework for **jointly inferring gene regulatory networks (GRNs) across cell subpopulations**. This repository contains the complete project notebook, Python implementation, final report, and the reference research paper used for the study.
 
-## 📌 Project Overview
-This repository contains the code, analysis, and final documentation for the **CHE629 (Artificial Intelligence in Systems Biology)** course project completed at the Indian Institute of Technology (IIT) Kanpur.
+---
 
-The project explores **DeepGRNCs**, a robust deep learning framework engineered to infer complex Gene Regulatory Networks (GRNs) from biological expression datasets. By leveraging advanced data processing pipelines and specialized neural network architectures, this work aims to decode and map the intricate regulatory interactions between genes with high precision.
+## Overview
 
-## 📂 Repository Structure
+DeepGRNCS is designed to infer regulatory relationships between transcription factors and target genes by leveraging information from multiple cell subpopulations. The project reproduces the core idea of the paper through a dual-stream neural architecture and benchmarks it against widely used GRN inference methods.
 
-| File | Description |
-| :--- | :--- |
-| **`Project_Colab_Notebook.ipynb`** | An interactive Google Colab notebook containing the end-to-end implementation, including dataset loading, preprocessing, model training, and evaluation. |
-| **`Project_Python_Code.py`** | A modular, standalone Python script version of the deep learning pipeline, optimized for local execution or cluster environments. |
-| **`CHE629 Project Report.pdf`** | The comprehensive final project report, compiled in LaTeX following the official **ICLR format**. It details the methodology, mathematical foundations, and empirical results. |
-| **`Reference Research Paper.pdf`** | The foundational literature and primary reference material that guided the conceptual and architectural implementation of the framework. |
+This repository is structured to be easy to run, easy to review, and easy to present. It includes:
 
-## 🛠️ Technical Implementation
-The computational pipeline is built to handle the complexities of biological datasets. Key components of the implementation include:
-- **Dataset Processing:** Custom loaders and preprocessing scripts designed to normalize, filter, and structure raw gene expression matrices.
-- **Deep Learning Framework:** Neural network modules tailored to capture the non-linear, high-dimensional dynamics of gene regulation.
-- **Evaluation & Metrics:** Rigorous benchmarking to validate the predicted networks against ground-truth biological interactions.
+- a fully reproducible Python/Colab workflow,
+- synthetic data generation utilities,
+- support for real BEELINE mHSC-L data,
+- benchmark implementations of **GENIE3** and **GRNBoost2**,
+- evaluation metrics and visualization utilities,
+- exported results and figures for analysis.
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
-To run the scripts locally, ensure you have a Python environment set up with standard scientific computing and machine learning libraries (e.g., PyTorch/TensorFlow, NumPy, Pandas, Scikit-learn).
+## Key Features
 
-### Running via Google Colab (Recommended)
-1. Open `Project_Colab_Notebook.ipynb` in Google Colab.
-2. Ensure your runtime is set to utilize a GPU hardware accelerator if available.
-3. Upload the required datasets as directed in the initial cells.
-4. Execute the cells sequentially. The notebook is entirely self-contained and handles necessary visualizations and outputs.
+- **Dual-stream DeepGRNCS architecture** for subpopulation-aware GRN inference
+- **Synthetic Gaussian dataset experiments** to validate the method in controlled settings
+- **BoolODE-based network experiments** for testing on diverse graph topologies
+- **Ablation study on the number of subpopulations**
+- **Real-data support** for the BEELINE **mHSC-L** benchmark
+- **Baseline comparisons** against GENIE3 and GRNBoost2
+- **Comprehensive evaluation** using AUROC, AUPRC, EPR, F1-score, precision, recall, and accuracy
+- **Publication-style plots** and CSV summaries saved to disk
 
-### Running Locally
-To execute the pipeline directly from your terminal, run:
+---
+
+## Repository Structure
+
+```text
+CHE629_Course_Project/
+├── CHE629 Project Report.pdf
+├── Project_Colab_Notebook.ipynb
+├── Project_Python_Code.py
+├── Reference Research Paper.pdf
+└── README.md
+```
+
+### File Summary
+
+- **`Project_Python_Code.py`** — the main executable Python script / Colab-ready notebook export
+- **`Project_Colab_Notebook.ipynb`** — notebook version of the project for interactive execution
+- **`CHE629 Project Report.pdf`** — final project report
+- **`Reference Research Paper.pdf`** — original research paper used as the project reference
+
+---
+
+## Methodology
+
+The project follows the workflow below:
+
+1. **Generate or load expression data**
+   - Gaussian simulated subpopulations
+   - BoolODE-style synthetic networks
+   - Real BEELINE mHSC-L dataset
+
+2. **Infer GRNs**
+   - DeepGRNCS
+   - GENIE3
+   - GRNBoost2
+
+3. **Evaluate predicted networks**
+   - AUROC
+   - AUPRC
+   - EPR
+   - F1-score
+   - Precision
+   - Recall
+   - Accuracy
+
+4. **Visualize results**
+   - ROC and PR curves
+   - Metric comparison bars
+   - Confusion matrices
+   - Heatmaps
+   - Architecture diagram
+   - Ablation plots
+
+---
+
+## Experiments Included
+
+### 1. Gaussian Simulated Dataset
+A multi-subpopulation synthetic benchmark used to test whether the model can recover regulatory structure under controlled conditions.
+
+### 2. BoolODE Network Benchmarks
+A set of Boolean-network-based simulations used to compare performance across different graph topologies.
+
+### 3. Subpopulation Ablation Study
+An ablation experiment that studies how performance changes as the number of available cell subpopulations increases.
+
+### 4. Real BEELINE mHSC-L Dataset
+A real-world benchmark for TF-to-target inference using the BEELINE mHSC-L dataset.
+
+---
+
+## Requirements
+
+The project is built around standard scientific Python libraries:
+
+- Python 3.8+
+- NumPy
+- Pandas
+- Matplotlib
+- Seaborn
+- SciPy
+- scikit-learn
+- XGBoost
+
+The notebook also creates output folders automatically for figures and results.
+
+---
+
+## Quick Start
+
+### Option 1: Run in Google Colab
+1. Open the notebook in Colab.
+2. Run the cells from top to bottom.
+3. The notebook will install dependencies, generate data, train models, evaluate results, and save outputs.
+
+### Option 2: Run the Python script locally
 ```bash
 python Project_Python_Code.py
+```
+
+The script is written in a Colab-friendly format, so it can also be executed by copying the cells into a notebook environment.
+
+---
+
+## Output Files
+
+The project saves generated artifacts in the following folders:
+
+- **`figures/`** — plots, architecture diagram, comparison charts, heatmaps
+- **`results/`** — CSV summaries, inferred weight matrices, and experiment outputs
+
+---
+
+## Why This Project Stands Out
+
+This repository is more than a code submission. It demonstrates:
+
+- a clear translation of a recent research idea into working code,
+- structured experimentation across synthetic and real datasets,
+- careful comparison with established baselines,
+- reproducibility through script-based execution,
+- presentation-ready outputs for academic review.
+
+---
+
+## Citation / Reference
+
+If you use or build upon this work, please cite the original research paper referenced in the repository:
+
+**DeepGRNCS: deep learning-based framework for jointly inferring gene regulatory networks across cell subpopulations**  
+Lei et al., *Briefings in Bioinformatics*, 2024
+
+---
+
+## Authors
+
+Project authors listed in the code:
+- Bhavishya Gupta
+- Ayush Bokad
+- Harshit Gupta
+- Anas Ali
+
+---
+
+## License
+
+No license file is currently included in the repository. If you intend to share or reuse this project publicly, consider adding an appropriate license.
+
+---
+
+## Acknowledgements
+
+- Original DeepGRNCS research paper
+- BEELINE benchmark resources
+- The open-source Python scientific computing ecosystem
+
+---
+
+## Contact
+
+For questions, improvements, or collaboration, feel free to open an issue or update the repository documentation as needed.
