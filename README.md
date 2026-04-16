@@ -174,12 +174,6 @@ Project authors listed in the code:
 
 ---
 
-## License
-
-No license file is currently included in the repository. If you intend to share or reuse this project publicly, consider adding an appropriate license.
-
----
-
 ## Acknowledgements
 
 - Original DeepGRNCS research paper
